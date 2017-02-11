@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<style>
+  span {
+    position: absolute;
+    color: black;
+    background-color: rgba(100, 200, 0, 0.7);
+    z-index: 1000;
+    display: none;
+  }
+</style>
+  </head>
+  <body>
+    <img id='img1' src="imgs/1.jpg" onmouseover="move(event)"/>
+    <img id='img2' src="imgs/2.jpg" width="300px" onmouseenter="move(event)"/>
+    <img id='img3' src="imgs/3.jpg" width="300px" onmouseenter="move(event)"/>
+    <img id='img4' src="imgs/4.jpg" width="300px" onmouseenter="move(event)"/>
+    <img id='img5' src="imgs/5.jpg" width="300px" onmouseenter="move(event)"/>
+    <span id='z'></span>
+  </body>
+  <script src="code.js"></script>
+</html>
