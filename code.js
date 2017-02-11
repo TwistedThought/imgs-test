@@ -8,7 +8,7 @@ function move(e) {
     var shiftX = e.pageX - coords.left;
     var shiftY = e.pageY - coords.top;
 
-    if (shiftX > (e.target.clientWidth-30) && shiftY > (e.target.clientHeight-30)) {
+    if (shiftX > (e.target.clientWidth-30) && shiftY > (e.target.clientHeight-30)) { //resize image
       elem.style.cursor = 'nw-resize';
 
       elem.onmousedown = function(e) {
@@ -23,10 +23,12 @@ function move(e) {
         }
       };
     }
-    else if (shiftY < 20) {
+    else if (shiftY < 20) { //change z-index
       elem.style.cursor = 'row-resize';
+
       elem.onmousedown = function(e) {
         var start = e.pageY;
+
         document.onmousemove = function(e) {
           document.body.style.cursor = 'row-resize';
           elem.style.cursor = 'row-resize';
@@ -36,6 +38,7 @@ function move(e) {
           zindex.style.left = e.pageX+10 + 'px';
           zindex.style.display = 'inline';
         }
+
         document.onmouseup = function(e) {
           document.body.style.cursor = 'default';
           document.onmousemove = null;
@@ -44,25 +47,17 @@ function move(e) {
         }
       }
     }
-    else {
+    else { //move image
       elem.style.cursor = 'move';
 
       elem.onmousedown = function(e) {
 
-        var coords = getCoords(elem);
-        var shiftX = e.pageX - coords.left;
-        var shiftY = e.pageY - coords.top;
-
         elem.style.position = 'absolute';
-        document.body.appendChild(elem);
-        moveAt(e);
-
-        elem.style.zIndex = 10;
 
         function moveAt(e) {
           elem.style.left = e.pageX - shiftX + 'px';
           elem.style.top = e.pageY - shiftY + 'px';
-        }
+        };
 
         document.onmousemove = function(e) {
           moveAt(e);
@@ -72,25 +67,19 @@ function move(e) {
           document.onmousemove = null;
           elem.onmouseup = null;
         };
-
-      }
+      };
 
       elem.ondragstart = function() {
         return false;
       };
     };
   }
-
 }
 
 function getCoords(elem) {
   var box = elem.getBoundingClientRect();
-
   return {
     top: box.top + pageYOffset,
-    left: box.left + pageXOffset,
-    right: box.right + pageXOffset,
-    bottom: box.botttom + pageYOffset
+    left: box.left + pageXOffset
   };
-
 }
